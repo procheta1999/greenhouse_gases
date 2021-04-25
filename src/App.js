@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "antd/dist/antd.css";
+import { Switch, Route } from 'react-router-dom';
+import MainPage from './pages/mainpage';
+import getParams from './pages/paramlocation';
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+      <Switch>
+        <Route exact path='/'  render={({ location, history }) => {
+            const { query } = getParams(location);
+            return <MainPage query={query} history={history} />;
+          }} />
+        {/* <Route path='/page2' component={Page2} />
+        <Route path='/page3' component={Page3} />
+        <Route path='/page4' component={Page4} />
+        <Route path='/page5' component={Page5} /> */}
+      </Switch>
+   
+</div>
   );
 }
 
