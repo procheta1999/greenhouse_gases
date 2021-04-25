@@ -14,7 +14,6 @@ const MainPage = props => {
       <div>
         <InputPage history={history} />
         <br></br>
-
         <br></br>
         <ResultsPage query={query} />
         <br></br>
