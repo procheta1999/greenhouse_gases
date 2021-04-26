@@ -6,13 +6,9 @@ Deployed on [https://frosty-mcnulty-66df76.netlify.app/](https://frosty-mcnulty-
 
 ## Libraries Used:
 1. Ant Design : for better visualization of dataset (Antd Tables, Input fields and also Card component used)
-<br>
 2. country-list : for getting the country codes of the countries selected (used in map visualization)
-<br>
 3. react-jvectormap : for visualization of world map and to customize world map according to dynamic data
-<br>
 4. react-router-dom : for routing purposes 
-<br>
 In the project directory, you can run:
 
 ### `yarn install`
