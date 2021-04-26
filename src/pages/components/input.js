@@ -3,16 +3,8 @@ import data from '../output.json';
 import setParams from '../setparams';
 import { Button, Card, Input } from 'antd';
 import { VectorMap } from "react-jvectormap";
-const mapData = {
-  CN: 100000,
-  IN: 9900,
-  SA: 86,
-  EG: 70,
-  SE: 0,
-  FI: 0,
-  FR: 0,
-  US: 20
-};
+const { getCode } = require("country-list");
+
 class InputPage extends React.PureComponent {
     state = { 
         time_period : '',
@@ -32,7 +24,7 @@ if(data.data[i].year== e.target.value)
 {
     console.log('area',data.data[i].country_or_area);
     a.push(data.data[i].country_or_area);
-    b[data.data[i].country_or_area]=parseFloat(data.data[i].value);
+    b[getCode(data.data[i].country_or_area)]=parseFloat(data.data[i].value);
     
 }
 
@@ -123,7 +115,7 @@ if(data.data[i].year== e.target.value)
           series={{
             regions: [
               {
-                values: mapData, // this is the map data
+                values: this.state.data_geo, // this is the map data
                 scale: ["#146804", "#48aeef"], // your color game's here
                 normalizeFunction: "polynomial"
               }
