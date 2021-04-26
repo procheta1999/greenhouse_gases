@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Visualization of International Greenhouse Gas Emissions Dataset
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React Application to visualize [International Greenhouse Gases Dataset](https://www.kaggle.com/unitednations/international-greenhouse-gas-emissions) .
+<br>
+Deployed on [https://frosty-mcnulty-66df76.netlify.app/](https://frosty-mcnulty-66df76.netlify.app/) .
 
-## Available Scripts
-
+## Libraries Used:
+1. Ant Design : for better visualization of dataset (Antd Tables, Input fields and also Card component used)
+<br>
+2. country-list : for getting the country codes of the countries selected (used in map visualization)
+<br>
+3. react-jvectormap : for visualization of world map and to customize world map according to dynamic data
+<br>
+4. react-router-dom : for routing purposes 
+<br>
 In the project directory, you can run:
 
+### `yarn install`
+
+Installs all the necessary node modules.
 ### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### `Basic Documentation of code`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. The app is divided into several components.
+2. Both functional and class components have been used.
+3. In the components folder in pages folder in src, you will find two files:
+  <br>
+  --> `input.js` : `where the input taken from the input box(i.e. the year) is stored as state and when 'search' button pressed, is passed in the URL as value of parameter 'query'. This input value is used to find out the name of multiple countries in the same time period and also pointing those countries only in the map.`
+  <img src="public\pi1 (1).png"/>
+  <img src="public\pi1 (2).png"/>
+  <br>
+  --> `table.js` : `where the whole json file is shown in proper table format along with filter and sorter in a few columns`
+4. mainpage.js collects all the component and place them orderly.
+5. output.json contains the dataset .
+6. For getting the value for the parameter 'query' in URL and setting it in the URL, the two files paramlocation.js and setparams.js are used.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -2,6 +2,7 @@ import React from 'react';
 import data from '../output.json'
 import { Table, Tag, Space } from 'antd';
 import { Card } from 'antd';
+//code for table representation
 const columns = [
     {
       title: 'Country',

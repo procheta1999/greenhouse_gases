@@ -12,31 +12,34 @@ class InputPage extends React.PureComponent {
         data_geo:{},
 
     };
-    updateInputValue = e => {
-        var a=[];
+    update = e => this.setState({ time_period: e.target.value }); //updates state
+    updateInputValue = () => {
+      var a=[];
         var b={};
-        const url = setParams({ query: e.target.value });
-      this.props.history.push(`?${url}`);
-        this.setState({ time_period: e.target.value,});
+      
+        
+        const url = setParams({ query: this.state.time_period }); //sets the 'query' parameter value by the 'time_period' value of state
+      this.props.history.push(`?${url}`); // pushes the parameter value to url
+
         for ( var i=0;i<data.data.length;i++)
         {
-if(data.data[i].year== e.target.value)
+if(data.data[i].year== this.state.time_period)
 {
     console.log('area',data.data[i].country_or_area);
-    a.push(data.data[i].country_or_area);
-    b[getCode(data.data[i].country_or_area)]=parseFloat(data.data[i].value);
+    a.push(data.data[i].country_or_area); // selects countries from the specific time period (this.state.time_period)
+    b[getCode(data.data[i].country_or_area)]=parseFloat(data.data[i].value); // prepare object for map visualization containing country code and emission value in that particular time period
     
 }
 
 
         }
         a = a.filter(function(item, pos) {
-            return a.indexOf(item) == pos;
+            return a.indexOf(item) == pos; //filters the duplicate values
         })
         
         this.setState({
-            filtered: a,
-            data_geo: b,
+            filtered: a, //updates state
+            data_geo: b, //updates state
         })
         console.log('area123',b);
         console.log('area123',a)
@@ -54,20 +57,13 @@ if(data.data[i].year== e.target.value)
             <br></br>
         <center>
             <Card title="Input Year" style={{ width: 300 }}>
-          {/* <input
-            type="text"
-            className="input"
-            placeholder="What am I looking for ?"
-            value={this.state.time_period}
-            onChange={this.updateInputValue}
-          /> */}
+         
           <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
-            onChange={this.updateInputValue}/>
+            onChange={this.update}
+            />
             <br></br>
-            {/* <br></br> */}
-          {/* <Button type="primary"
-            onClick={this.updateURL}
-          >Search</Button> */}
+            <br></br>
+            <Button type="primary" onClick={this.updateInputValue}>Search</Button>
           </Card>
           </center>
           <br></br>
@@ -86,7 +82,7 @@ if(data.data[i].year== e.target.value)
           containerStyle={{
             width: "100%",
             height: "1000px"
-          }} // gets the country code
+          }} 
           containerClassName="map"
           onRegionClick={(area)=>
             {
@@ -116,7 +112,7 @@ if(data.data[i].year== e.target.value)
             regions: [
               {
                 values: this.state.data_geo, // this is the map data
-                scale: ["#146804", "#48aeef"], // your color game's here
+                scale: ["#146804", "#48aeef"], 
                 normalizeFunction: "polynomial"
               }
             ]
