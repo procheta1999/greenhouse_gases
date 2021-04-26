@@ -2,14 +2,27 @@ import React from 'react';
 import data from '../output.json';
 import setParams from '../setparams';
 import { Button, Card, Input } from 'antd';
+import { VectorMap } from "react-jvectormap";
+const mapData = {
+  CN: 100000,
+  IN: 9900,
+  SA: 86,
+  EG: 70,
+  SE: 0,
+  FI: 0,
+  FR: 0,
+  US: 20
+};
 class InputPage extends React.PureComponent {
     state = { 
         time_period : '',
         filtered:[],
+        data_geo:{},
 
     };
     updateInputValue = e => {
         var a=[];
+        var b={};
         const url = setParams({ query: e.target.value });
       this.props.history.push(`?${url}`);
         this.setState({ time_period: e.target.value,});
@@ -19,6 +32,7 @@ if(data.data[i].year== e.target.value)
 {
     console.log('area',data.data[i].country_or_area);
     a.push(data.data[i].country_or_area);
+    b[data.data[i].country_or_area]=parseFloat(data.data[i].value);
     
 }
 
@@ -30,7 +44,9 @@ if(data.data[i].year== e.target.value)
         
         this.setState({
             filtered: a,
+            data_geo: b,
         })
+        console.log('area123',b);
         console.log('area123',a)
         console.log('area123',a.length)
         
@@ -70,6 +86,50 @@ if(data.data[i].year== e.target.value)
 </ul>
               </Card>
           </center>
+          <br></br>
+          <VectorMap
+          map={"world_mill"}
+          backgroundColor="transparent"
+          zoomOnScroll={true}
+          containerStyle={{
+            width: "100%",
+            height: "1000px"
+          }} // gets the country code
+          containerClassName="map"
+          onRegionClick={(area)=>
+            {
+              console.log('value',area)
+              console.log('value',this.state.data_geo[area])
+            }
+          }
+          regionStyle={{
+            initial: {
+              fill: "#e4e4e4",
+              "fill-opacity": 0.9,
+              stroke: "none",
+              "stroke-width": 0,
+              "stroke-opacity": 0
+            },
+            hover: {
+              "fill-opacity": 0.8,
+              cursor: "pointer"
+            },
+            selected: {
+              fill: "#2938bc" // color for the clicked country
+            },
+            selectedHover: {}
+          }}
+          regionsSelectable={true}
+          series={{
+            regions: [
+              {
+                values: mapData, // this is the map data
+                scale: ["#146804", "#48aeef"], // your color game's here
+                normalizeFunction: "polynomial"
+              }
+            ]
+          }}
+        />
         </div>
       );
     }
