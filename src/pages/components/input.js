@@ -1,7 +1,7 @@
 import React from 'react';
 import data from '../output.json';
 import setParams from '../setparams';
-import { Button, Card, Input } from 'antd';
+import { Button, Card, Input, Row, Col } from 'antd';
 import { VectorMap } from "react-jvectormap";
 const { getCode } = require("country-list");
 
@@ -53,35 +53,28 @@ if(data.data[i].year== this.state.time_period)
         
       return (
         <div id="search">
+           <br></br>
             <br></br>
-            <br></br>
-        <center>
-            <Card title="Input Year" style={{ width: 300 }}>
+         <Row justify="space-around">
+       
+      <Col span={8}><center><Card title="Input Year" style={{ width: 300 }}>
          
-          <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
-            onChange={this.update}
-            />
-            <br></br>
-            <br></br>
-            <Button type="primary" onClick={this.updateInputValue}>Search</Button>
-          </Card>
-          </center>
-          <br></br>
-          <center>
-          <Card title="Countries" style={{ width: 300 }}>
-<ul>
-    {this.state.filtered.map(name=><li>{name}</li>)}
-</ul>
-              </Card>
-          </center>
-          <br></br>
-          <VectorMap
+         <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
+           onChange={this.update}
+           />
+           <br></br>
+           <br></br>
+           <Button type="primary" onClick={this.updateInputValue}>Search</Button>
+         </Card></center></Col>
+         
+      <Col span={16}> <VectorMap
           map={"world_mill"}
+          zoomButtons={false}
           backgroundColor="transparent"
           zoomOnScroll={true}
           containerStyle={{
             width: "100%",
-            height: "1000px"
+            height: "500px"
           }} 
           containerClassName="map"
           onRegionClick={(area)=>
@@ -117,7 +110,19 @@ if(data.data[i].year== this.state.time_period)
               }
             ]
           }}
-        />
+        /></Col>
+    </Row>
+           
+        
+          <br></br>
+          <center>
+          <Card title="Countries" style={{ width: 300 }}>
+<ul>
+    {this.state.filtered.map(name=><li>{name}</li>)}
+</ul>
+              </Card>
+          </center>
+          
         </div>
       );
     }
