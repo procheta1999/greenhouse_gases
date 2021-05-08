@@ -9,7 +9,7 @@ const columns = [
     title: 'Country',
     dataIndex: 'name',
     key: 'name',
-    responsive: ['sm'],
+   
     width:'50%',
     filters: [
       { text: 'Australia', value: 'Australia' },
@@ -66,7 +66,7 @@ const columns = [
       dataIndex: 'value',
       key: 'value',
       sorter: (a, b) => a.value - b.value,
-      responsive: ['sm'],
+      
       width:'50%',
      
     },
@@ -74,7 +74,7 @@ const columns = [
       title: 'Category of Emission',
       dataIndex: 'category',
       key: 'category',
-      responsive: ['sm'],
+     
       width:'50%',
       render: category =>{
           let color, cat;
@@ -271,7 +271,7 @@ if(data.data[i].year== this.state.time_period)
          <br></br>
          <center>
           <Card title="Values of Emisssion of Countries" style={{ width: 500 }}>
-          <Table bordered columns={columns} dataSource={this.state.table_data} scroll={{ y: 240}} />
+          <Table bordered columns={columns} dataSource={this.state.table_data} scroll={{ y: 400}} size="small" />
               </Card>
           </center></Col>
          
@@ -292,6 +292,7 @@ if(data.data[i].year== this.state.time_period)
             }
           }
           onRegionTipShow={(e, el, code)=>{
+            console.log('code',code);
             var x;
             var country = this.state.data_geo[code];
 if(country === undefined) {
