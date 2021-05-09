@@ -169,7 +169,7 @@ class InputPage extends React.PureComponent {
 
         for ( var i=0;i<data.data.length;i++)
         {
-if(data.data[i].year== this.state.time_period)
+if(data.data[i].year=== this.state.time_period)
 {
   var c={};
     // console.log('area',data.data[i].country_or_area,i);
@@ -295,6 +295,7 @@ if(data.data[i].year== this.state.time_period)
             console.log('code',code);
             var x;
             var country = this.state.data_geo[code];
+            if(country){
 if(country === undefined) {
    el.html(el.html());
 }else{
@@ -304,6 +305,7 @@ if(country === undefined) {
           x=el.html()+'<br/> value of ' + this.state.category[k] + ' emission : '+' '+this.state.data_geo[code][k]+'<br/>';
           el.html(x);
   }
+}
 }
 
             // el.html(el.html()+' (values - '+'<br/>'+this.state.data_geo[code]+')');
