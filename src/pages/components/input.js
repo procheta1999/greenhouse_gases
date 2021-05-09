@@ -1,7 +1,8 @@
 import React from 'react';
 import data from '../output.json';
 import setParams from '../setparams';
-import { Button, Card, Input, Row, Col, Table, Tag } from 'antd';
+import { Button, Card, Input, Row, Col, Table, Tag, Tooltip } from 'antd';
+import { InfoCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { VectorMap } from "react-jvectormap";
 const { getCode } = require("country-list");
 const columns = [
@@ -155,6 +156,7 @@ class InputPage extends React.PureComponent {
         data_geo:{},
         table_data:[],
         category:[],
+        progress:false,
 
     };
     update = e => this.setState({ time_period: e.target.value }); //updates state
@@ -162,7 +164,9 @@ class InputPage extends React.PureComponent {
       var a=[];
         var b={};
         var d=[];
-      
+      this.setState({
+        progress:true,
+      })
         
         const url = setParams({ query: this.state.time_period }); //sets the 'query' parameter value by the 'time_period' value of state
       this.props.history.push(`?${url}`); // pushes the parameter value to url
@@ -241,6 +245,7 @@ if(data.data[i].year=== this.state.time_period)
           table_data:d,
             filtered: a, //updates state
             data_geo: b, //updates state
+            progress:false,
         })
         console.log('area123',b);
         console.log('area123',a)
@@ -262,6 +267,11 @@ if(data.data[i].year=== this.state.time_period)
          
          <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
            onChange={this.update}
+           suffix={
+            <div>{this.state.progress === false ? (<Tooltip title="Enter year and know about the values of emission of different greenhouse gases of different countries in that respective year">
+              <InfoCircleOutlined style={{ color: 'blue' }} />
+            </Tooltip>) : (<LoadingOutlined style={{color:'blue'}}></LoadingOutlined>)}</div>
+          }
            />
            <br></br>
            <br></br>

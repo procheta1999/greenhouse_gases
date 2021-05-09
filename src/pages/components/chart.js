@@ -2,7 +2,8 @@ import React , {useState} from 'react';
 import {useEffect} from 'react';
 import data from '../output.json';
 import { Chart } from 'react-charts'
-import { Row, Col, Card, Select , Button, Typography} from 'antd';
+import { Row, Col, Card, Select , Button, Typography, Tooltip} from 'antd';
+import {InfoCircleOutlined} from '@ant-design/icons';
 import setPath from '../setpath';
 import getKeyByValue from './key';
 import sortFunction from './sort';
@@ -47,7 +48,14 @@ const updationValue=()=>
     }
     console.log('map',b.sort(sortFunction));
     setdataChartList(b.sort(sortFunction));
-    setProgress(true);
+    console.log('datachartlist',dataChartList);
+    // if(dataChartList.length===0)
+    // {
+         setProgress(true);
+    // }
+    // else{
+    // setProgress(true);
+    // }
 }
 
  const dataChart = React.useMemo(
@@ -127,6 +135,7 @@ const updationValue=()=>
         country();
         console.log('mount it!');
     }, []);
+    console.log('datachartList',dataChartList)
     // useEffect(() => {
     //    dataChart();
     // }, [dataChartList]); 
@@ -137,7 +146,11 @@ const updationValue=()=>
       <Row justify="space-around">
  
    <Col span={8}>
-   <center><Card title="Input Country and Parameter" style={{ width: 300 }}>
+   <center><Card title="Input Country and Parameter" style={{ width: 300 }} extra={<Tooltip title="Plot showing year along X-axis and values of emission of the parameter along Y-axis">
+              <InfoCircleOutlined style={{ color: 'blue' }} />
+            </Tooltip>}>
+   
+            
    <Select style={{ width: 200 }} placeholder='Select Country' showSearch onChange={updateCountry}>
        {countryList.map(country=> <Option key={country} value={country}>{country}</Option>)}
     </Select>
@@ -154,15 +167,17 @@ const updationValue=()=>
    <Col span={13}>
    {progress===false ? (<div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'300px'}}>
       <h3 style={{textAlign:'center'}}>Select country and parameter(category of emission) and see how the values of emission have changed over years! Simply select the values and see the line chart appearing in this space.</h3>
+    </div>):(<div>{dataChartList.length===0 ? (<div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'300px'}}>
+      <h3 style={{textAlign:'center'}}>Sorry! No data to show.</h3>
     </div>):(<div
       style={{
-        width: '500px',
+        width: '700px',
         height: '300px'
       }}
       className="chart"
     >
       <Chart data={dataChart} axes={axes} tooltip/>
-    </div>)}
+    </div>)}</div>)}
     <br></br>
     <br></br></Col>
  </Row>
