@@ -157,14 +157,17 @@ class InputPage extends React.PureComponent {
         table_data:[],
         category:[],
         progress:false,
+        valid:true,
 
     };
     update = e => this.setState({ time_period: e.target.value }); //updates state
     updateInputValue = () => {
+      if(this.state.time_period > 1989 && this.state.time_period<2015){
       var a=[];
         var b={};
         var d=[];
       this.setState({
+        valid:true,
         progress:true,
       })
         
@@ -241,6 +244,7 @@ if(data.data[i].year=== this.state.time_period)
         // })
         
         this.setState({
+          valid:true,
           category:category,
           table_data:d,
             filtered: a, //updates state
@@ -251,7 +255,17 @@ if(data.data[i].year=== this.state.time_period)
         console.log('area123',a)
         console.log('area123',a.length)
         
-        
+      }
+      else{
+        this.setState({
+          valid:false,
+          filtered:[],
+        data_geo:{},
+        table_data:[],
+        category:[],
+        progress:false,
+        })
+      }  
     }
    
 
@@ -268,11 +282,12 @@ if(data.data[i].year=== this.state.time_period)
          <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
            onChange={this.update}
            suffix={
-            <div>{this.state.progress === false ? (<Tooltip title="Enter year and know about the values of emission of different greenhouse gases of different countries in that respective year">
+            <div>{this.state.progress === false ? (<Tooltip title="Enter year between 1990 and 2014 and know about the values of emission of different greenhouse gases of different countries in that respective year">
               <InfoCircleOutlined style={{ color: 'blue' }} />
             </Tooltip>) : (<LoadingOutlined style={{color:'blue'}}></LoadingOutlined>)}</div>
           }
            />
+           {this.state.valid===true ? (<span></span>):(<span style={{color:'blue'}}>Enter year between 1990 and 2014</span>)}
            <br></br>
            <br></br>
            <Button type="primary" onClick={this.updateInputValue}>Search</Button>
