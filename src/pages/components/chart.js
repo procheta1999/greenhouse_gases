@@ -11,25 +11,13 @@ const { Option } = Select;
 
 const Graph= props =>{
     const [countryList,setcountryList]=useState([]);
-    const [categoryList,setcategoryList]=useState([]);
+    const [categoryList,setcategoryList]=useState({});
     const [countrySelect,setcountrySelect]=useState('');
     const [categorySelect,setcategorySelect]=useState('');
     const [dataChartList,setdataChartList]=useState([]);
     const [progress,setProgress]=useState(false);
 const updateCountry = value => setcountrySelect(value);
 const updateCategory = value => setcategorySelect(value);
-const categoryListFilt={
-    carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent:'CO2',
-    greenhouse_gas_ghgs_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent:'Greenhouse Gases',
-    methane_ch4_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent:'CH4' ,
-    nitrous_oxide_n2o_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent:'N2O',
-    sulphur_hexafluoride_sf6_emissions_in_kilotonne_co2_equivalent:'SF6',
-    hydrofluorocarbons_hfcs_emissions_in_kilotonne_co2_equivalent:'HFCs',
-    unspecified_mix_of_hydrofluorocarbons_hfcs_and_perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent:'HFCs & PFCs unspecified mix',
-    nitrogen_trifluoride_nf3_emissions_in_kilotonne_co2_equivalent:'NF3',
-    perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent:'PFCs',
-    greenhouse_gas_ghgs_emissions_including_indirect_co2_without_lulucf_in_kilotonne_co2_equivalent:'Greenhouse Gases(including indirect CO2)',
-}
 const updationValue=()=>
 {
     var b=[];
@@ -38,7 +26,7 @@ const updationValue=()=>
     for(var k=0;k<data.data.length;k++)
     {
         var a=[];
-        if(data.data[k].country_or_area===countrySelect && data.data[k].category=== getKeyByValue(categoryListFilt,categorySelect))
+        if(data.data[k].country_or_area===countrySelect && data.data[k].category=== categorySelect)
         {
            a.push(parseInt(data.data[k].year));
            a.push(parseFloat(data.data[k].value)); 
@@ -81,61 +69,63 @@ const updationValue=()=>
   )
     const country =()=>{
         var a=[];
-        var b=[];
+        var b={};
         for ( var i=0;i<data.data.length;i++)
         {
             a.push(data.data[i].country_or_area);
             if (data.data[i].category === 'carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent') {
-                b.push('CO2');
+                b['carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent']='CO2';
                }
                else if (data.data[i].category === 'greenhouse_gas_ghgs_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent') {
-                 b.push('Greenhouse Gases');
+                 b['greenhouse_gas_ghgs_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent']='Greenhouse Gases';
                  }
                  else if (data.data[i].category === 'methane_ch4_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent'){
-                    b.push('CH4');
+                    b['methane_ch4_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent']='CH4';
                  }
                  else if (data.data[i].category === 'nitrous_oxide_n2o_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent'){
-                    b.push('N2O');
+                    b['nitrous_oxide_n2o_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent']='N2O';
                  }
                  else if(data.data[i].category === 'sulphur_hexafluoride_sf6_emissions_in_kilotonne_co2_equivalent'){
-                    b.push('SF6');
+                    b['sulphur_hexafluoride_sf6_emissions_in_kilotonne_co2_equivalent']='SF6';
                  }
                  else if(data.data[i].category === 'hydrofluorocarbons_hfcs_emissions_in_kilotonne_co2_equivalent')
                  {
-                    b.push('HFCs');
+                    b['hydrofluorocarbons_hfcs_emissions_in_kilotonne_co2_equivalent']='HFCs';
                  }
                  else if(data.data[i].category === 'unspecified_mix_of_hydrofluorocarbons_hfcs_and_perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent'){
-                    b.push('HFCs & PFCs unspecified mix');
+                    b['unspecified_mix_of_hydrofluorocarbons_hfcs_and_perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent']='HFCs & PFCs unspecified mix';
                  }
                  else if(data.data[i].category === 'nitrogen_trifluoride_nf3_emissions_in_kilotonne_co2_equivalent')
                  {
-                    b.push('NF3');
+                    b['nitrogen_trifluoride_nf3_emissions_in_kilotonne_co2_equivalent']='NF3';
                  }
                  else if (data.data[i].category === 'perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent')
                  {
-                    b.push('PFCs');
+                    b['perfluorocarbons_pfcs_emissions_in_kilotonne_co2_equivalent']='PFCs';
                  }
                  else if (data.data[i].category === 'greenhouse_gas_ghgs_emissions_including_indirect_co2_without_lulucf_in_kilotonne_co2_equivalent')
                  {
-                    b.push('Greenhouse Gases(including indirect CO2)');
+                    b['greenhouse_gas_ghgs_emissions_including_indirect_co2_without_lulucf_in_kilotonne_co2_equivalent']='Greenhouse Gases(including indirect CO2)';
                  }
         }
         a = a.filter(function(item, pos) {
             return a.indexOf(item) == pos; //filters the duplicate values
         })
-        b = b.filter(function(item, pos) {
-            return b.indexOf(item) == pos; //filters the duplicate values
-        })
+      //   b = b.filter(function(item, pos) {
+      //       return b.indexOf(item) == pos; //filters the duplicate values
+      //   })
         setcountryList(a);
         setcategoryList(b);
-        console.log('countrylist',categoryList);
+        
     }
     useEffect(() => {
         console.log('data',data.data);
         country();
+        console.log('countrylist',categoryList);
         console.log('mount it!');
     }, []);
     console.log('datachartList',dataChartList)
+    console.log('countrylist',categoryList);
     // useEffect(() => {
     //    dataChart();
     // }, [dataChartList]); 
@@ -157,7 +147,11 @@ const updationValue=()=>
     <br></br>
     <br></br>
     <Select style={{ width: 200 }} placeholder='Select Parameter(Category)' showSearch onChange={updateCategory}>
-       {categoryList.map(category=> <Option key={category} value={category}>{category}</Option>)}
+    {Object.entries(categoryList).map(([key, value]) => (
+                    <Option key={key} value={key}>
+                      {value}
+                    </Option>
+                  ))}
     </Select>
     <br></br>
     <br></br>
