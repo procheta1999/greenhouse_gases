@@ -5,61 +5,53 @@ import { Chart } from 'react-charts'
 import { Row, Col, Card, Select , Button, Typography, Tooltip} from 'antd';
 import {InfoCircleOutlined} from '@ant-design/icons';
 import setPath from '../setpath';
-import getKeyByValue from './key';
 import sortFunction from './sort';
 const { Option } = Select;
 
 const Graph= props =>{
-    const [countryList,setcountryList]=useState([]);
-    const [categoryList,setcategoryList]=useState({});
-    const [countrySelect,setcountrySelect]=useState('');
-    const [categorySelect,setcategorySelect]=useState('');
-    const [dataChartList,setdataChartList]=useState([]);
-    const [progress,setProgress]=useState(false);
-const updateCountry = value => setcountrySelect(value);
-const updateCategory = value => setcategorySelect(value);
+    const [countryList,setcountryList]=useState([]); // initializing country list for dropdown
+    const [categoryList,setcategoryList]=useState({}); // initializing category list for dropdown
+    const [countrySelect,setcountrySelect]=useState(''); // initializing value of country to be sent to url
+    const [categorySelect,setcategorySelect]=useState(''); // initializing value of category to be sent to url
+    const [dataChartList,setdataChartList]=useState([]); // initializing data array for plottting graph
+    const [progress,setProgress]=useState(false); // checking value loading or not, or data present or not
+const updateCountry = value => setcountrySelect(value); // updates countrySelect
+const updateCategory = value => setcategorySelect(value); // updates categorySelect
+// updates parameter of url
 const updationValue=()=>
 {
     var b=[];
     const url= setPath({ country: countrySelect,category: categorySelect  });
-    props.history.push(`?${url}`);
+    props.history.push(`?${url}`); // sets parameter values of url
     for(var k=0;k<data.data.length;k++)
     {
         var a=[];
+        // for plotting chart
         if(data.data[k].country_or_area===countrySelect && data.data[k].category=== categorySelect)
         {
-           a.push(parseInt(data.data[k].year));
-           a.push(parseFloat(data.data[k].value)); 
-           b.push(a);
+           a.push(parseInt(data.data[k].year)); // pushes each year to local varaible a (array)
+           a.push(parseFloat(data.data[k].value)); // pushes each value to local variable a (array) after changing it from string to float
+           b.push(a); // pushes 2d array a to b (array)
         }
        
     }
     console.log('map',b.sort(sortFunction));
-    setdataChartList(b.sort(sortFunction));
+    setdataChartList(b.sort(sortFunction)); //updates dataChartList and b.sort(sortFunction) sorts the list data in ascending order
     console.log('datachartlist',dataChartList);
-    // if(dataChartList.length===0)
-    // {
-         setProgress(true);
-    // }
-    // else{
-    // setProgress(true);
-    // }
-}
+         setProgress(true); // update progress
 
+}
+// dataChart contains values for plotting graph
  const dataChart = React.useMemo(
     () => [
       {
         label: 'Value of emission',
         data: dataChartList,
       },
-    //   {
-    //     label: 'Series 2',
-    //     data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-    //   }
     ],
     [dataChartList,setProgress]
   )
- 
+ // axes is for the axes of the graph
   const axes = React.useMemo(
     () => [
       { primary: true, type: 'linear', position: 'bottom',show:[1990,1991] },
@@ -67,12 +59,14 @@ const updationValue=()=>
     ],
     [dataChartList,setProgress]
   )
+  // called when function unmounts to collect values of country and category for the respective dropdowns
     const country =()=>{
         var a=[];
         var b={};
         for ( var i=0;i<data.data.length;i++)
         {
-            a.push(data.data[i].country_or_area);
+            a.push(data.data[i].country_or_area); //pushing country name to local variable a (array)
+            //pushing key and value pair to local variable b (object)
             if (data.data[i].category === 'carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent') {
                 b['carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent']='CO2';
                }
@@ -111,13 +105,11 @@ const updationValue=()=>
         a = a.filter(function(item, pos) {
             return a.indexOf(item) == pos; //filters the duplicate values
         })
-      //   b = b.filter(function(item, pos) {
-      //       return b.indexOf(item) == pos; //filters the duplicate values
-      //   })
-        setcountryList(a);
-        setcategoryList(b);
+        setcountryList(a); // updating countryList
+        setcategoryList(b); //updating categoryList
         
     }
+    //called when the function unmounts
     useEffect(() => {
         console.log('data',data.data);
         country();
@@ -126,9 +118,6 @@ const updationValue=()=>
     }, []);
     console.log('datachartList',dataChartList)
     console.log('countrylist',categoryList);
-    // useEffect(() => {
-    //    dataChart();
-    // }, [dataChartList]); 
     return(
         <div id="search">
         <br></br>

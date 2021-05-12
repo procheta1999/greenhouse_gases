@@ -16,10 +16,6 @@ const App = () => {
             const { country,category }=getPath(location);
             return <MainPage query={query} history={history} country={country} category={category} />;
           }} />
-        {/* <Route path='/page2' component={Page2} />
-        <Route path='/page3' component={Page3} />
-        <Route path='/page4' component={Page4} />
-        <Route path='/page5' component={Page5} /> */}
       </Switch>
    
 </div>

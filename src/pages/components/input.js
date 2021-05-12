@@ -151,19 +151,18 @@ const columns = [
 ];
 class InputPage extends React.PureComponent {
     state = { 
-        time_period : '',
-        filtered:[],
-        data_geo:{},
-        table_data:[],
-        category:[],
-        progress:false,
-        valid:true,
+        time_period : '', //for passing value to parameter 'query' of url
+        data_geo:{}, // for map
+        table_data:[], // for filtering values according to the paramter value
+        category:[], // for category of emission
+        progress:false, // checks if data is loading or not
+        valid:true, // for checking whether 
 
     };
     update = e => this.setState({ time_period: e.target.value }); //updates state
     updateInputValue = () => {
+      //checks if this.state.time_period is in the given limit
       if(this.state.time_period > 1989 && this.state.time_period<2015){
-      var a=[];
         var b={};
         var d=[];
       this.setState({
@@ -176,19 +175,20 @@ class InputPage extends React.PureComponent {
 
         for ( var i=0;i<data.data.length;i++)
         {
+          //checks if this.state.time_period exists in the dataset or not and if present then where in the dataset
 if(data.data[i].year=== this.state.time_period)
 {
   var c={};
-    // console.log('area',data.data[i].country_or_area,i);
     var country = data.data[i].country_or_area;
     var arr=[];
     var category=[];
     for (var j=0;j<data.data.length;j++)
     {
+      // checks where the country and the year chosen exist in the list
       if(data.data[j].country_or_area===country && data.data[j].year===this.state.time_period)
       {
-        // console.log('area',data.data[j].country_or_area,data.data[j].value,data.data[j].category);
-        arr.push(data.data[j].value);
+        arr.push(data.data[j].value); // pushes each value to local variable arr (array)
+        // conditionally inserting each category to local variable category (array)
         if (data.data[j].category === 'carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent') {
          category.push('CO2');
         }
@@ -225,41 +225,33 @@ if(data.data[i].year=== this.state.time_period)
           }
       }
     }
-    // console.log('area',arr);
-    // a.push(data.data[i].value); // selects countries from the specific time period (this.state.time_period)
+   
     b[getCode(data.data[i].country_or_area)]=arr; // prepare object for map visualization containing country code and emission value in that particular time period
     c['name']=data.data[i].country_or_area;
     c['value']=data.data[i].value;
     c['category']=data.data[i].category;
-    d.push(c);
+    d.push(c); // for the visualization of data in table on specific year selection
 }
 
 
 
         }
         console.log('final',b);
-        // console.log('data_filtered',d);
-        // a = a.filter(function(item, pos) {
-        //     return a.indexOf(item) == pos; //filters the duplicate values
-        // })
         
         this.setState({
           valid:true,
           category:category,
           table_data:d,
-            filtered: a, //updates state
             data_geo: b, //updates state
             progress:false,
         })
         console.log('area123',b);
-        console.log('area123',a)
-        console.log('area123',a.length)
         
       }
+      // if year chosen not falls within the given limit, then no data shown in map or in table
       else{
         this.setState({
           valid:false,
-          filtered:[],
         data_geo:{},
         table_data:[],
         category:[],
@@ -333,12 +325,7 @@ if(country === undefined) {
 }
 }
 
-            // el.html(el.html()+' (values - '+'<br/>'+this.state.data_geo[code]+')');
            
-            // for (i=0;i<Object.keys(this.state.data_geo);i++)
-            // {
-            //   var x= 
-            // }
           }
         }
           regionStyle={{
