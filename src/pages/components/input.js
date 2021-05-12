@@ -274,7 +274,7 @@ if(data.data[i].year=== this.state.time_period)
          <Input size="small" placeholder="Input year and get list of countries" value={this.state.time_period}
            onChange={this.update}
            suffix={
-            <div>{this.state.progress === false ? (<Tooltip title="Enter year between 1990 and 2014 and know about the values of emission of different greenhouse gases of different countries in that respective year">
+            <div>{this.state.progress === false ? (<Tooltip title="Enter year between 1990 and 2014 and know about the values of emission of different greenhouse gases of different countries in that respective year. Also see the map appear on the right side as you type in a value.">
               <InfoCircleOutlined style={{ color: 'blue' }} />
             </Tooltip>) : (<LoadingOutlined style={{color:'blue'}}></LoadingOutlined>)}</div>
           }
