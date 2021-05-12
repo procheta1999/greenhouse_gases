@@ -287,7 +287,7 @@ if(data.data[i].year=== this.state.time_period)
          <br></br>
          <br></br>
          <center>
-          <Card title="Values of Emisssion of Countries" style={{ width: 500 }}>
+          <Card title="Values of Emission of Countries" style={{ width: 500 }}>
           <Table bordered columns={columns} dataSource={this.state.table_data} scroll={{ y: 400}} size="small" />
               </Card>
           </center></Col>

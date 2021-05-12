@@ -22,14 +22,39 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 1. The app is divided into several components.
 2. Both functional and class components have been used.
-3. In the components folder in pages folder in src, you will find two files:
+3. In the components folder in pages folder in src, you will find five files:
   <br>
-  --> `input.js` : `where the input taken from the input box(i.e. the year) is stored as state and when 'search' button pressed, is passed in the URL as value of parameter 'query'. This input value is used to find out the name of multiple countries in the same time period and also pointing those countries only in the map.`
-  <img src="public\pi1 (1).png"/>
-  <img src="public\pi1 (2).png"/>
+  --> input.js : where the input taken from the input box(i.e. the year) is stored as state and when 'search' button pressed, is passed in the URL as value of parameter 'query'. This input value is used to find out the name of multiple countries and also their corresponding data of values and categories of emission in table format in the same time period. Also pointing of those countries only and their corresponding data is done in the map, with the help of tooltips.
   <br>
-  --> `table.js` : `where the whole json file is shown in proper table format along with filter and sorter in a few columns`
-4. mainpage.js collects all the component and place them orderly.
+  <img src="public\intro.png"/>
+  <br>
+  Validation is also attached to the input box to accept input values within the range of 1990 and 2014 as per the dataset.
+  <br>
+  <img src="public\nodata.png"/>
+  <br>
+  <img src="public\yesdata.png"/>
+  <br>
+  --> table.js : where the whole json file is shown in proper table format along with filters and sorter in the columns.
+  <br>
+  <img src="public\table.png"/>
+  <br>
+  <br>
+  -->intro.js: simply contains the component that appears at the top of the page, i.e. the short introduction.
+  <br>
+  <img src="public\intro.png"/>
+  <br>
+  -->chart.js:where the inputs of country and category(parameter) are taken from the respective dropdowns. The selected values are stored as state and when 'search' button pressed, is passed in the URL as value of parameters 'country' and 'category' respectively. These values are used to plot line chart between the years and the value of the emissions of that particular category. If data is not present, then a message telling that no data was found, is shown in place of the line chart.
+  <br> 
+  <img src="public/chart.png">
+  <br>
+  <img src="public/nodatafound.png">
+  <br>
+  <img src="public/datafound.png">
+  <br>
+  --> sort.js: used to arrange a 2d array in ascending order of the first values of each included array parts.
+4. mainpage.js collects all the component and places them orderly. React Lazy loading is used for better user experience and also for improving page performance.
 5. output.json contains the dataset .
 6. For getting the value for the parameter 'query' in URL and setting it in the URL, the two files paramlocation.js and setparams.js are used.
+7. App.js : used for routing purposes.
+8. For getting the value for the parameters 'country' and 'category' in URL and setting it in the URL, the two files pathlocation.js and setpath.js are used.
 
