@@ -1,6 +1,8 @@
 # Visualization of International Greenhouse Gas Emissions Dataset
 
 A React Application to visualize [International Greenhouse Gases Dataset](https://www.kaggle.com/unitednations/international-greenhouse-gas-emissions) .
+
+![](https://media1.giphy.com/media/H0VvGdnwbJux2/200w.webp?cid=ecf05e47zhl56ywylk5r07qe7ko4mp8id28p27zfib2qakin&rid=200w.webp&ct=g)
 <br>
 Deployed on [https://frosty-mcnulty-66df76.netlify.app/](https://frosty-mcnulty-66df76.netlify.app/) .
 
