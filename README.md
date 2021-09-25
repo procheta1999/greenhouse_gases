@@ -60,3 +60,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 7. App.js : used for routing purposes.
 8. For getting the value for the parameters 'country' and 'category' in URL and setting it in the URL, the two files pathlocation.js and setpath.js are used.
 
+
+## 🚀 Contribution
+
+If you want to contribute to this project, follow the gudelines in [CONTRIBUTING.md](https://github.com/procheta1999/greenhouse_gases/blob/master/CONTRIBUTING.md)
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
